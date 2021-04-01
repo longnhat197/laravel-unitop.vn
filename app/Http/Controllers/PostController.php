@@ -14,6 +14,7 @@ class PostController extends Controller
     public function index()
     {
         //
+        return view('post');
     }
 
     /**
@@ -24,6 +25,7 @@ class PostController extends Controller
     public function create()
     {
         //
+        return redirect()->route('post.index');
     }
 
     /**
@@ -46,6 +48,7 @@ class PostController extends Controller
     public function show($id)
     {
         //
+        return "Hiển thị bài viết";
     }
 
     /**

@@ -93,3 +93,14 @@ Route::get('/product/show/{id}','ProductController@show');
 Route::get('/product/create','ProductController@create');
 Route::get('/product/update/{id}','ProductController@update');
 
+
+
+// Route::resource('post','PostController');
+
+#Bài tập controller
+Route::get('admin/post/add','AdminPostController@add');
+Route::get('admin/post/show','AdminPostController@show');
+Route::get('admin/post/update/{id}','AdminPostController@update');
+Route::get('admin/post/delete/{id}','AdminPostController@delete');
+
+Route::get('post/index','PostController@index');

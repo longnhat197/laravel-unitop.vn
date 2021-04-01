@@ -8,6 +8,6 @@
 </head>
 <body>
     <h1>Trang danh sách bài viết</h1>
-    {{$id}}
+    {{-- {{$id}} --}}
 </body>
 </html>
