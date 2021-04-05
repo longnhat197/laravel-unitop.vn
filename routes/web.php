@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\DB;
 
 /*
 |--------------------------------------------------------------------------
@@ -89,18 +90,43 @@ Route::get('/', function () {
 
 //-------------------------------------------------
 
-Route::get('/product/show/{id}','ProductController@show');
-Route::get('/product/create','ProductController@create');
-Route::get('/product/update/{id}','ProductController@update');
+// Route::get('/product/show/{id}','ProductController@show');
+// Route::get('/product/create','ProductController@create');
+// Route::get('/product/update/{id}','ProductController@update');
 
 
 
-// Route::resource('post','PostController');
+// // Route::resource('post','PostController');
 
-#Bài tập controller
-Route::get('admin/post/add','AdminPostController@add');
-Route::get('admin/post/show','AdminPostController@show');
-Route::get('admin/post/update/{id}','AdminPostController@update');
-Route::get('admin/post/delete/{id}','AdminPostController@delete');
+// #Bài tập controller
+// Route::get('admin/post/add','AdminPostController@add');
+// Route::get('admin/post/show','AdminPostController@show');
+// Route::get('admin/post/update/{id}','AdminPostController@update');
+// Route::get('admin/post/delete/{id}','AdminPostController@delete');
 
-Route::get('post/index','PostController@index');
+// Route::get('post/index','PostController@index');
+Route::get('child',function(){
+    return view('child',['data'=>7,'post_title'=>"Khoa hoc laravel"]);
+});
+Route::get('demo',function(){
+    $users =array(
+        1=>array(
+            'name'=>'Bùi Đức Tiến'
+        ),
+        2=>array(
+            'name'=>'Nhật Nam'
+        ),
+        3=>array(
+            'name'=>'Bùi Cường'
+        )
+
+    );
+    return view('demo',compact('users'));
+});
+Route::get('users/insert',function(){
+    DB::table('users')->insert(
+        ['name'=>'Bùi Đức Tiến','email'=>'buitien1297@gmail.com','password'=>bcrypt('admin')]
+    );
+});
+Route::get('posts/add','PostController@add');
+Route::get('posts/show','PostController@show');
