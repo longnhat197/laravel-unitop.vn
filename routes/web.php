@@ -1,5 +1,5 @@
 <?php
-
+use App\Post;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
 
@@ -125,8 +125,24 @@ Route::get('demo',function(){
 });
 Route::get('users/insert',function(){
     DB::table('users')->insert(
-        ['name'=>'Bùi Đức Tiến','email'=>'buitien1297@gmail.com','password'=>bcrypt('admin')]
+        ['name'=>'Bùi Nhật Nam','email'=>'nhatnam2020@gmail.com','password'=>bcrypt('admin')]
     );
 });
 Route::get('posts/add','PostController@add');
 Route::get('posts/show','PostController@show');
+Route::get('posts/update/{id}','PostController@update');
+Route::get('posts/delete/{id}','PostController@delete');
+
+Route::get('product/add','ProductController@add');
+Route::get('product/show','ProductController@show');
+Route::get('product/update/{id}','ProductController@update');
+Route::get('product/delete/{id}','ProductController@delete');
+
+//ELOQUENT ORM
+// Route::get('posts/read',function(){
+//     $posts = Post::all();
+//     return $posts;
+// });
+Route::get('posts/read','PostController@read');
+Route::get('posts/restore/{id}','PostController@restore');
+Route::get('posts/permanentlyDelete/{id}','PostController@permanentlyDelete');

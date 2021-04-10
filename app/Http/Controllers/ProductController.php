@@ -3,21 +3,38 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
     //
-    function show($id){
-        // return "Thông tin sản phẩm có id: ".$id;
-        $price =250000;
-        $colors = ['red','green'];
-        return view('product.show',compact('id','price','colors'));
+    function show()
+    {
+        $products = DB::table('products')
+            ->get();
+        echo "<pre>";
+        print_r($products);
+        echo "</pre>";
     }
-    function create(){
+    function add()
+    {
+        DB::table('products')->insert(
+            ['name'=>'Samsung Note 9','price'=>'12500000','user_id'=>5,'product_cat_id'=>2]
+        );
         // return "Thêm sản phẩm mới";
-        return view('product.create');
     }
-    function update($id){
-        return "Update sản phẩm có id: ".$id;
+    function update($id)
+    {
+        DB::table('products')
+        ->where('id',$id)
+        ->update(
+            ['product_cat_id'=>2]
+        );
+
+    }
+    function delete($id){
+        DB::table('products')
+        ->where('id',$id)
+        ->delete();
     }
 }
