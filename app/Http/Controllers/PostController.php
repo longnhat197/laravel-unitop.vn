@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Post;
+use App\User;
+
 class PostController extends Controller
 {
     //
@@ -21,15 +23,48 @@ class PostController extends Controller
         // $post->votes = 40;
         // $post->save();
 
-        Post::create([
-            'title'=>'Create user 4',
-            'content'=>'Content create 4',
-            'user_id'=>4,
-            'votes'=>145
+        // Post::create([
+        //     'title'=>'Create user 4',
+        //     'content'=>'Content create 4',
+        //     'user_id'=>4,
+        //     'votes'=>145
 
-        ]);
+        // ]);
 
+        return view('post.create');
     }
+
+    function store(Request $request)
+    {
+        $request->validate(
+            [
+                'title' => 'required|max:100|min:5',
+                'content' => 'required'
+            ],
+            [
+                'required'=>':attribute không được để trống',
+                'min'=>':attribute có độ dài tối thiểu :min ký tự',
+                'max'=>':attribute có độ dài tối đa :max ký tự'
+            ],
+            [
+                'title'=>'Tiêu đề',
+                'content'=>'Nội dung'
+            ]
+        );
+        if($request->hasFile('file')){
+            $file = $request->file;
+            echo $file->getClientOriginalName();
+            echo "<br>";
+            echo $file->getClientOriginalExtension();
+            echo "<br>";
+            echo $file ->getSize();
+            echo "<br>";
+            $file->move('public/uploads',$file->getClientOriginalName());
+
+        }
+        // return $request->input();
+    }
+
     function show()
     {
         // $posts = DB::table('posts')->get();
@@ -40,7 +75,7 @@ class PostController extends Controller
         // // }
         // return $posts;
         // $posts = DB::table('posts')->select('title','content')->first();
-        // $posts = DB::table('posts')->where('id',2)->first(); 
+        // $posts = DB::table('posts')->where('id',2)->first();
         // echo $posts->user_id;
         // print_r($posts);
         // $numbers_posts = DB::table('posts')->where('user_id',4)->count();
@@ -103,14 +138,13 @@ class PostController extends Controller
         // $post->votes = 40;
         // $post->save();
 
-        $post = Post::where('id',$id)
-        ->update([
-            'title'=>'Update',
-            'content'=>'Content update',
-            'user_id'=>4,
-            'votes'=>75
-        ]);
-
+        $post = Post::where('id', $id)
+            ->update([
+                'title' => 'Update',
+                'content' => 'Content update',
+                'user_id' => 4,
+                'votes' => 75
+            ]);
     }
     function delete($id)
     {
@@ -130,7 +164,8 @@ class PostController extends Controller
 
 
     }
-    function read(){
+    function read()
+    {
         // $posts = Post::all();
         // echo "<pre>";
         // print_r($posts);
@@ -153,17 +188,30 @@ class PostController extends Controller
         // return $posts;
 
         // $posts = Post::withTrashed()->get();
-        $posts = Post::onlyTrashed()->get();
+        // $posts = Post::onlyTrashed()->get();
+        // return $posts;
+
+        // $img = Post::find(1)
+        // ->FeaturedImages;
+        // return $img;
+
+        $user = Post::find(10)
+            ->user;
+
+        $posts = User::find(4)
+            ->posts;
         return $posts;
     }
-    function restore($id){
+    function restore($id)
+    {
         Post::onlyTrashed()
-        ->where('id',$id)
-        ->restore();
+            ->where('id', $id)
+            ->restore();
     }
-    function permanentlyDelete($id){
+    function permanentlyDelete($id)
+    {
         Post::onlyTrashed()
-        ->where('id',$id)
-        ->forceDelete();
+            ->where('id', $id)
+            ->forceDelete();
     }
 }

@@ -65,7 +65,7 @@ Route::get('/', function () {
 //     return $id.'---'.$slug;
 // })->where(['slug'=>'[a-zA-Z0-9-_]+']);
 
-//Định tuyến qua 1 view 
+//Định tuyến qua 1 view
 // Route::view('/welcome','welcome');
 
 // Route::view('/post','post',['id'=>20]);
@@ -105,44 +105,57 @@ Route::get('/', function () {
 // Route::get('admin/post/delete/{id}','AdminPostController@delete');
 
 // Route::get('post/index','PostController@index');
-Route::get('child',function(){
-    return view('child',['data'=>7,'post_title'=>"Khoa hoc laravel"]);
-});
-Route::get('demo',function(){
-    $users =array(
-        1=>array(
-            'name'=>'Bùi Đức Tiến'
-        ),
-        2=>array(
-            'name'=>'Nhật Nam'
-        ),
-        3=>array(
-            'name'=>'Bùi Cường'
-        )
+// Route::get('child',function(){
+//     return view('child',['data'=>7,'post_title'=>"Khoa hoc laravel"]);
+// });
+// Route::get('demo',function(){
+//     $users =array(
+//         1=>array(
+//             'name'=>'Bùi Đức Tiến'
+//         ),
+//         2=>array(
+//             'name'=>'Nhật Nam'
+//         ),
+//         3=>array(
+//             'name'=>'Bùi Cường'
+//         )
 
-    );
-    return view('demo',compact('users'));
-});
-Route::get('users/insert',function(){
-    DB::table('users')->insert(
-        ['name'=>'Bùi Nhật Nam','email'=>'nhatnam2020@gmail.com','password'=>bcrypt('admin')]
-    );
-});
-Route::get('posts/add','PostController@add');
-Route::get('posts/show','PostController@show');
-Route::get('posts/update/{id}','PostController@update');
-Route::get('posts/delete/{id}','PostController@delete');
+//     );
+//     return view('demo',compact('users'));
+// });
+// Route::get('users/insert',function(){
+//     DB::table('users')->insert(
+//         ['name'=>'Bùi Nhật Nam','email'=>'nhatnam2020@gmail.com','password'=>bcrypt('admin')]
+//     );
+// });
+// Route::get('posts/add','PostController@add');
+// Route::get('posts/show','PostController@show');
+// Route::get('posts/update/{id}','PostController@update');
+// Route::get('posts/delete/{id}','PostController@delete');
 
-Route::get('product/add','ProductController@add');
-Route::get('product/show','ProductController@show');
-Route::get('product/update/{id}','ProductController@update');
-Route::get('product/delete/{id}','ProductController@delete');
+// Route::get('product/add','ProductController@add');
+// Route::get('product/show','ProductController@show');
+// Route::get('product/update/{id}','ProductController@update');
+// Route::get('product/delete/{id}','ProductController@delete');
 
 //ELOQUENT ORM
 // Route::get('posts/read',function(){
 //     $posts = Post::all();
 //     return $posts;
 // });
-Route::get('posts/read','PostController@read');
-Route::get('posts/restore/{id}','PostController@restore');
-Route::get('posts/permanentlyDelete/{id}','PostController@permanentlyDelete');
+// Route::get('posts/read','PostController@read');
+// Route::get('posts/restore/{id}','PostController@restore');
+// Route::get('posts/permanentlyDelete/{id}','PostController@permanentlyDelete');
+
+// Route::get('images/read','FeaturedImagesController@read');
+
+// Route::get('role/show','RoleController@show');
+
+//FORM
+
+Route::get('post/add','PostController@add');
+
+Route::post('post/store','PostController@store');
+Route::get('user/reg',function(){
+    return view('user/reg');
+});
