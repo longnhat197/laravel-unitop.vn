@@ -156,6 +156,9 @@ Route::get('/', function () {
 Route::get('post/add','PostController@add');
 
 Route::post('post/store','PostController@store');
+
+Route::get('post/show','PostController@show');
+
 Route::get('user/reg',function(){
     return view('user/reg');
 });

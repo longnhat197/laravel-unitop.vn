@@ -51,17 +51,25 @@ class PostController extends Controller
                 'content'=>'Nội dung'
             ]
         );
+        $input =$request ->all();
+
+
         if($request->hasFile('file')){
             $file = $request->file;
-            echo $file->getClientOriginalName();
-            echo "<br>";
+            $filename= $file->getClientOriginalName();
+
+
             echo $file->getClientOriginalExtension();
             echo "<br>";
+
             echo $file ->getSize();
             echo "<br>";
             $file->move('public/uploads',$file->getClientOriginalName());
-
+            $thumbnail = 'public/uploads/'.$filename;
+            $input['thumbnail'] = $thumbnail;
         }
+        $input['user_id'] = 4;
+        Post::create($input);
         // return $request->input();
     }
 
@@ -117,6 +125,8 @@ class PostController extends Controller
         // echo "<pre>";
         // print_r($posts);
         // echo "</pre>";
+        $posts = Post::all();
+        return view('post.index',compact('posts'));
 
     }
     function update($id)

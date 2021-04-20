@@ -15,6 +15,7 @@ class AddThumbnailToPostsTable extends Migration
     {
         Schema::table('posts', function (Blueprint $table) {
             //
+            $table ->string('thumbnail',255);
         });
     }
 
@@ -27,6 +28,7 @@ class AddThumbnailToPostsTable extends Migration
     {
         Schema::table('posts', function (Blueprint $table) {
             //
+            $table->dropColumn('thumbnail');
         });
     }
 }
