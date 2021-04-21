@@ -71,10 +71,12 @@ class PostController extends Controller
         $input['user_id'] = 4;
         Post::create($input);
         // return $request->input();
+        return redirect('post/show')->with('status','Thêm bài viết thành công!');
     }
 
     function show()
     {
+        // return redirect()->away('https://www.google.com/');
         // $posts = DB::table('posts')->get();
         // // foreach($posts as $post){
         // //     echo $post->title;
